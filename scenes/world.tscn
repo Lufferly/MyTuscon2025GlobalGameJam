@@ -1,0 +1,51 @@
+[gd_scene load_steps=8 format=3 uid="uid://cmiav5fdhh40y"]
+
+[ext_resource type="Script" path="res://scripts/world.gd" id="1_rwenk"]
+[ext_resource type="PackedScene" uid="uid://co3jfcwiugf0a" path="res://scenes/bubble.tscn" id="1_sitrx"]
+[ext_resource type="PackedScene" uid="uid://biq6f1oro22fd" path="res://scenes/bubble_column.tscn" id="3_0ycqp"]
+[ext_resource type="PackedScene" uid="uid://cfwripkj8c1yp" path="res://scenes/player.tscn" id="4_i6pp7"]
+[ext_resource type="Script" path="res://scripts/DebugControl.gd" id="5_jyilp"]
+[ext_resource type="Script" path="res://scenes/GameCamera.gd" id="5_tgekh"]
+[ext_resource type="Script" path="res://scripts/DebugLabel.gd" id="6_p5p81"]
+
+[node name="World" type="Node2D"]
+script = ExtResource("1_rwenk")
+
+[node name="Bubble" parent="." instance=ExtResource("1_sitrx")]
+position = Vector2(269, 234)
+
+[node name="BubbleColumn" parent="." instance=ExtResource("3_0ycqp")]
+position = Vector2(363, 475)
+
+[node name="BubbleColumn2" parent="." instance=ExtResource("3_0ycqp")]
+position = Vector2(623, 478)
+
+[node name="BubbleColumn3" parent="." instance=ExtResource("3_0ycqp")]
+position = Vector2(648, 479)
+
+[node name="Player" parent="." instance=ExtResource("4_i6pp7")]
+position = Vector2(557, 394)
+
+[node name="GameCamera" type="Camera2D" parent="." node_paths=PackedStringArray("player_node")]
+position = Vector2(576, 330)
+script = ExtResource("5_tgekh")
+player_node = NodePath("../Player")
+
+[node name="DebugControl" type="Control" parent="GameCamera"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -574.0
+offset_top = -327.0
+offset_right = 577.0
+offset_bottom = 320.0
+script = ExtResource("5_jyilp")
+metadata/_edit_lock_ = true
+
+[node name="DebugLabel" type="Label" parent="GameCamera/DebugControl" node_paths=PackedStringArray("player_node")]
+layout_mode = 0
+offset_left = 22.0
+offset_top = 4.0
+offset_right = 534.0
+offset_bottom = 246.0
+script = ExtResource("6_p5p81")
+player_node = NodePath("../../../Player")

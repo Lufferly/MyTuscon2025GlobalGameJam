@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://biq6f1oro22fd"]
+
+[ext_resource type="Texture2D" uid="uid://je4urbx23bff" path="res://images/bubble_column.png" id="1_4x2al"]
+[ext_resource type="Script" path="res://scripts/bubble_column.gd" id="1_k7y2j"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3rk7g"]
+size = Vector2(5, 44)
+
+[node name="BubbleColumn" type="StaticBody2D"]
+script = ExtResource("1_k7y2j")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_4x2al")
+
+[node name="BubbleTimer" type="Timer" parent="."]
+wait_time = 2.5
+autostart = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 2)
+shape = SubResource("RectangleShape2D_3rk7g")
+disabled = true
+
+[connection signal="timeout" from="BubbleTimer" to="." method="_on_bubble_timer_timeout"]
