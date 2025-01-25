@@ -9,4 +9,4 @@ func _process(delta):
 	text += "Player state: " + player_node.STATES_STRING_REPRESENTATION[player_node.state] + "\n"
 	text += "Player speed: " + str(player_node.current_speed) + "\n"
 	text += "Player direction: " + str(player_node.current_direction) + "\n"
-	text += "Player breath: " + str(player_node.current_breath) + "\n"
+	text += "Player bubbles: " + str(player_node.bubbles_stored) + "\n"

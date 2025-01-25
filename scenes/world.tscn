@@ -1,12 +1,18 @@
-[gd_scene load_steps=8 format=3 uid="uid://cmiav5fdhh40y"]
+[gd_scene load_steps=10 format=3 uid="uid://2ivtfuctwqfw"]
 
 [ext_resource type="Script" path="res://scripts/world.gd" id="1_rwenk"]
 [ext_resource type="PackedScene" uid="uid://co3jfcwiugf0a" path="res://scenes/bubble.tscn" id="1_sitrx"]
 [ext_resource type="PackedScene" uid="uid://biq6f1oro22fd" path="res://scenes/bubble_column.tscn" id="3_0ycqp"]
 [ext_resource type="PackedScene" uid="uid://cfwripkj8c1yp" path="res://scenes/player.tscn" id="4_i6pp7"]
 [ext_resource type="Script" path="res://scripts/DebugControl.gd" id="5_jyilp"]
-[ext_resource type="Script" path="res://scenes/GameCamera.gd" id="5_tgekh"]
+[ext_resource type="Script" path="res://scripts/GameCamera.gd" id="5_oq08h"]
 [ext_resource type="Script" path="res://scripts/DebugLabel.gd" id="6_p5p81"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_34sal"]
+size = Vector2(22, 543)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dpnls"]
+size = Vector2(986, 19)
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_rwenk")
@@ -25,10 +31,11 @@ position = Vector2(648, 479)
 
 [node name="Player" parent="." instance=ExtResource("4_i6pp7")]
 position = Vector2(557, 394)
+collision_mask = 4
 
 [node name="GameCamera" type="Camera2D" parent="." node_paths=PackedStringArray("player_node")]
 position = Vector2(576, 330)
-script = ExtResource("5_tgekh")
+script = ExtResource("5_oq08h")
 player_node = NodePath("../Player")
 
 [node name="DebugControl" type="Control" parent="GameCamera"]
@@ -49,3 +56,19 @@ offset_right = 534.0
 offset_bottom = 246.0
 script = ExtResource("6_p5p81")
 player_node = NodePath("../../../Player")
+
+[node name="Aquarium" type="StaticBody2D" parent="."]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Aquarium"]
+position = Vector2(75, 316.5)
+shape = SubResource("RectangleShape2D_34sal")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Aquarium"]
+position = Vector2(1083, 316.5)
+shape = SubResource("RectangleShape2D_34sal")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Aquarium"]
+position = Vector2(580, 578)
+shape = SubResource("RectangleShape2D_dpnls")
